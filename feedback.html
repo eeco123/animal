@@ -1,0 +1,57 @@
+<html>
+<head>
+<title>Student Form</title>
+
+<script language="VBScript">
+
+sub Val_Onclick()
+
+	If ValidForm.t1.Value="" Or ValidForm.t2.Value="" Or ValidForm.t4.Value="" Then
+	    MsgBox "Please * indicate complsary field"
+	Else
+		
+   		If IsNumeric(ValidForm.t1.Value) Then
+		MsgBox "Name Should not contain a number"
+		End If
+		If IsNumeric(ValidForm.t4.Value) Then
+			if len(ValidForm.t4.Value)<10 then
+                              MsgBox "Mobile number should contain 10 digit"  
+                       end if 
+			if ValidForm.t4.Value=0000000000 Then
+			 MsgBox "Mobile number should  not contain 0 digit"  
+			 end if 
+		Else
+			MsgBox "Mobile number do not contain charcter"
+		End If
+		
+  
+	End If
+End sub
+
+</script>
+
+
+</head>
+
+<BODY bgcolor="#99CC00">
+<bgsound src="F:\ANIMAL\Titanic.mp3">
+<MARQUEE bgcolor = "green" behaviour="alternate"><FONT size = 7 color = "Orange">
+<B>FeedBack</B></FONT></MARQUEE>
+
+
+<center>
+<form name="ValidForm" action="http://localhost/oraclecon.asp" method="post">
+<font color=black size=6>Name:</font><INPUT TYPE=TEXT NAME="t1">*<br><br>
+<font color=black size=6>Address:</font><input type=text NAME="t2">*<br><br>
+<font color=black size=6>Gender:</font><INPUT TYPE="radio" name="t3" value="Male">Male&nbsp&nbsp&nbsp&nbsp<INPUT TYPE="radio" name="t3" value="Female">Female<br><br>
+<font color=black size=6>Mobile No:</font><INPUT TYPE=TEXT SIZE=20 NAME="t4" Maxlength=10>*<br><br>
+<font color=black size=6>Email ID:</font><input type="text" name="t5"><br><br>
+<font color=black size=6>Comment</font><br><textarea rows=3 cols=25 name="t6"></textarea><br><br>
+<font color=black size=6>Suggesion</font><br><textarea rows=3 cols=25 name="t7"></textarea><br><br>
+<font color=black size=6>No of Visit:</font><input type=text name="t8"><br><br>
+<input type="Submit" value="SUBMIT" name="val"><br>
+</center>
+
+</form>
+</body>
+</html>

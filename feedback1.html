@@ -1,0 +1,110 @@
+<html>
+<head><title>Databse Connectivity</title>
+<center>
+<script language="javascript">
+      function getSubmit()
+      {
+    
+         var cn = new ActiveXObject("ADODB.Connection"); 
+         var strConn="Provider=Microsoft.ACE.OLEDB.12.0;Data source=../database.accdb";
+         var rs = new ActiveXObject("ADODB.Recordset"); 
+         var SQL = "INSERT INTO Stud(nm,email,mob,com) values( '"+ frm1.t1.value +"', '" + frm1.t2.value +"', " + frm1.t3.value + ",'" + frm1.t4.value +"')";
+        
+         cn.Open(strConn); 
+         rs.Open(SQL,cn); 
+             alert("Data saved successfully...." );	
+  frm1.t1.value=""
+ frm1.t2.value=""
+ frm1.t3.value=""
+ frm1.t4.value=""
+     
+        cn.Close() ;
+     }
+
+
+function isempty()
+{
+  
+  var s=document.frm1.t1.value.length;
+    if(s==0)
+     {
+      
+       alert("textbox should not empty"); 
+     }
+
+     } 
+
+function ch()
+{
+  
+      var t=document.frm1.t1.value;
+       for(i=0;i<=t.length;i++)
+        {
+	var ch=t.charCodeAt(i);
+	if((ch<97 || ch>122)&&(ch<65 || ch>122))
+	{
+		alert("number not allowed")
+	}
+	}
+	document.frm1.t1.focus();
+
+}
+
+function ch1()
+{
+	var s=document.frm1.t3.value;
+	if(isNaN(s))
+	{
+	  alert("character should not be allowed")
+	}
+	document.frm1.t3.value.length=null;
+	
+
+} 
+
+function checkemail()
+ {
+    
+var x=document.frm1.t2.value;
+var atpos=x.indexOf("@");
+var dotpos=x.lastIndexOf(".");
+if (atpos<1 || dotpos<atpos+2 || dotpos+2>=x.length)
+  {
+  alert("Not a valid e-mail address");
+  
+  }
+
+}
+</script>
+</head>
+<body bgcolor="#99CC00">
+<p align="center">
+
+
+<font color="#336600" size="+3">&nbsp;&nbsp; <MARQUEE bgcolor = "green" scrollamount=5 BEHAVIOR=ALTERNATE><FONT size = 7 color = "Orange">
+<B>@----@>   FeedBack  <@----@</B></FONT></MARQUEE>
+
+<font color="#999999">
+ </p>
+ <form name="frm1">
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#8b5330" size="+3"><b>Post 
+   Comments</b></font><br>
+   <font color="blue" size="2"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+   Comments: (Limit 250 characters)&nbsp;&nbsp; </b></font>
+   <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;</font>Name<font color="#999999"><font color="#FF0000"> *</font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;<input type="text" name="t1" size="30" onblur="isempty()" onkeypress="ch()"/><br/><br>
+
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font>Email<font color="#999999"><font color="#FF0000"> *</font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;
+  <input type="text" name="t2" Size="30" onblur="checkemail()" /><br/><br>
+
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font>Mobile No<font color="#999999">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;
+<input type="text" name="t3" size="30" onkeypress="ch1()"/><br/><br>
+<br>
+
+</font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Comments   :    <font color="#999999">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<textarea name="t4" rows="3" cols="28" ></textarea><br><br>&nbsp;&nbsp;&nbsp;</br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" value="sumbit" onClick="getSubmit()" />
+  <input value="Reset" type="reset" name="reset">
+   </center>
+</form>
+</body>
+</html>

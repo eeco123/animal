@@ -1,0 +1,238 @@
+
+<html>
+<head>
+<script language="javascript">
+function add1()
+{
+var cn =new ActiveXObject("ADODB.Connection");
+var strconn="provider=Microsoft.Jet.OLEDB.4.0; Data Source=Database2.mdb";
+var rs=new ActiveXObject("ADODB.Recordset");
+var n=0;
+form1.cnttext.value="0";
+for(i=0;i<=document.form1.elements.length-1;i++)
+     {
+        var v=document.form1.elements[i].value.length;
+        if(v==0)
+         {
+           alert("Textbox Shouldn't Empty ");
+           n=1;
+         } 
+     } 
+if(n==1)
+{
+    alert("please fill all information");
+}
+else
+{
+var sql="insert into Feedback (Name,Address,ContactNo,Emailid,Suggesion,Comment) values (' "+form1.nametext.value+" ',' "+form1.addtext.value+" ',' "+form1.context.value+" ' , ' "+form1.mailtext.value+" ',' "+form1.sugtext.value+" ',' "+form1.comtext.value+" ')";
+cn.open(strconn);
+rs.open(sql,cn);
+alert("Record is successfully added");
+mycount();
+cn.close();
+}
+}
+function mycount()
+{
+var cn =new ActiveXObject("ADODB.Connection");
+var strconn="provider=Microsoft.Jet.OLEDB.4.0; Data Source=Database2.mdb";
+var rs=new ActiveXObject("ADODB.Recordset");
+
+var sql="select * from  Feedback ";
+cn.open(strconn);
+rs.open(sql,cn);
+var c=0;
+rs.MoveFirst();
+while(!rs.eof)
+{
+  c=c+1;
+rs.MoveNext();
+}
+ form1.cnttext.value=""+c;
+cn.close();
+
+}
+
+function show1()
+{
+var cn =new ActiveXObject("ADODB.Connection");
+var strconn="provider=Microsoft.Jet.OLEDB.4.0; Data Source=Database2.mdb";
+var rs=new ActiveXObject("ADODB.Recordset");
+
+var sql="select * from Feedback";
+cn.open(strconn);
+rs.open(sql,cn);
+form1.nametext.value=rs(0);
+ form1.addtext.value=rs(1);
+ form1.context.value=rs(2);
+ form1.mailtext.value=rs(3);
+form1.comtext.value=rs(4);
+form1.sugtext.value=rs(5);
+form1.cnttext.value=rs(6);
+cn.close();
+}
+
+
+function clr()
+{
+
+ form1.nametext.value=""
+ form1.addtext.value=""
+ form1.context.value=""
+ form1.mailtext.value=""
+ form1.comtext.value=""
+ form1.sugtext.value=""
+form1.cnttext.value=""
+}
+
+function checkemail()
+ {
+    
+var x=document.form1.mailtext.value;
+var at=x.indexOf("@");
+var dot=x.lastIndexOf(".");
+if (at<1 || dot<at+2 || dot+2>=x.length)
+  {
+  alert("Not a valid e-mail address");
+  }
+
+}
+function checkchar1()
+  {
+    var str=document.form1.nametext.value;
+    for(i=0;i<=str.length;i++)
+     {
+        var ch=str.charCodeAt(i);
+        if((ch<65||ch>92)&&(ch<97||ch>122))
+         {
+           alert("Please enter  proper name...... ");
+      form1.nametext.value="";
+          }
+               document.form1.nametext.focus();
+      } 
+           
+  }
+function checkchar2()
+  {
+    var str=document.form1.addtext.value;
+    for(i=0;i<=str.length;i++)
+     {
+        var ch=str.charCodeAt(i);
+        if((ch<65||ch>92)&&(ch<97||ch>122))
+         {
+           alert("Please enter  proper address...... ");
+      form1.addtext.value="";
+          }
+               document.form1.addtext.focus();
+      } 
+           
+  }
+function checkchar3()
+  {
+    var str=document.form1.sugtext.value;
+    for(i=0;i<=str.length;i++)
+     {
+        var ch=str.charCodeAt(i);
+        if((ch<65||ch>92)&&(ch<97||ch>122))
+         {
+           alert("Please enter  proper Suggesion...... ");
+      form1.sugtext.value="";
+          }
+               document.form1.sugtext.focus();
+      } 
+           
+  }
+function checkchar4()
+  {
+    var str=document.form1.comtext.value;
+    for(i=0;i<=str.length;i++)
+     {
+        var ch=str.charCodeAt(i);
+        if((ch<65||ch>92)&&(ch<97||ch>122))
+         {
+           alert("Please enter  proper comment ...... ");
+form1.comtext.value="";
+      
+          }
+               document.form1.comtext.focus();
+      } 
+           
+  }
+ 
+
+function checknum()
+   {
+      var n=document.form1.context.value;
+       if(isNaN(n))
+         {
+               alert("Invalid  Contact No...");
+                document.form1.context.value=""; 
+         } 
+   } 
+
+
+
+
+function   empty()
+ {
+    for(i=0;i<=document.form1.elements.length-1;i++)
+     {
+        var v=document.form1.elements[i].value.length;
+        if(v==0)
+         {
+           alert("Textbox Shouldn't Empty ");
+           
+         } 
+     } 
+ }  
+</script>
+</head>
+<body bgcolor=#99CC00>
+<form method="post" action="http://localhost/mon.asp">
+
+<center> <b>  <MARQUEE bgcolor = "Brown"><FONT size = 7 color = "Orange">
+<B>FeedBack</B></FONT></MARQUEE>
+
+<center>
+
+<tr><td>
+<font color=black size=6> Name:-</font>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type=text name=nametext   size=40 width="45"  onkeyup="checkchar1()" ><font color="red">*</font><p>
+</td></tr>
+<tr><td>
+<font color=black size=6> Address:-</font>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type=text name=addtext  size=40  onkeyup="checkchar2()"><font color="red">*</font><p>
+</td>
+<tr>
+<td>
+<font color=black size=6>Contact No:-</font>&nbsp&nbsp&nbsp&nbsp&nbsp<input type=text name=context  size=40   onkeyup=" checknum()"><font color="red">*</font><p>
+</td>
+<tr><td>
+<font color=black size=6>EmailId:-</font>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type=text name=mailtext  size=40  onblur="checkemail()"><p>
+</td></tr>
+<tr><td>
+<font color=black size=6>Comment:-<br></font>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<textarea &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<textarea&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<textarea name=comtext rows=5 cols=40></textarea><p>
+  </td>
+</tr>
+<tr><td>
+<font color=black size=6>Suggesion:- <br></font>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<textarea name=sugtext rows=5 cols=40 ></textarea><p>
+<tr>
+<td>
+<font color=black size=6>No.of Visit :-</font>&nbsp<input type=text name=cnttext  size=40><p>
+  </td>
+</tr>
+<tr><td>
+
+  </td>
+</tr>
+<tr>
+<td></font>
+<center> <input type=button name=btn value="SUBMIT" onclick="add1()"  >
+<input type=button name=btn7 value="RESET" onclick="clr()"> </td></tr></table><p>
+<font color=red size=10>Thanks</font>
+
+<center>
+</form>
+</body>
+ </html>
+
+
+
